@@ -12,6 +12,15 @@ namespace Mihaja.Models
         private string _userFirstName;
         private DateTime _userBirth;
 
+
+        private string _userPassword;
+
+        public string MyProperty
+        {
+            get { return _userPassword; }
+            set { _userPassword = value; }
+        }
+
         public int UserId   
         {
             get { return _userId; }
