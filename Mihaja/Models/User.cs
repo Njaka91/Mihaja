@@ -15,7 +15,7 @@ namespace Mihaja.Models
 
         private string _userPassword;
 
-        public string MyProperty
+        public string UserPassword
         {
             get { return _userPassword; }
             set { _userPassword = value; }
@@ -63,5 +63,7 @@ namespace Mihaja.Models
             _userBirth = userBirth;
             _userPassword = userPassword;
         }
+
+
     }
 }
