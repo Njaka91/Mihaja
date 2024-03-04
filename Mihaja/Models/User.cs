@@ -15,7 +15,7 @@ namespace Mihaja.Models
 
         private string _userPassword;
 
-        public string Password
+        public string UPassword
 
         {
             get { return _userPassword; }
