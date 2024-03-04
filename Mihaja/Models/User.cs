@@ -44,7 +44,9 @@ namespace Mihaja.Models
             set { _userBirth = value; }
         }
 
-        
+        public User()
+        {
+        }
 
         public User(int userId, string userName, string userFirstName, DateTime userBirth, string userPassword)
         {
