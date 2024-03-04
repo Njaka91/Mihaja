@@ -15,7 +15,7 @@ namespace Mihaja.Models
 
         private string _userPassword;
 
-        public string Password
+        public string UserPassword
 
         {
             get { return _userPassword; }
@@ -44,9 +44,7 @@ namespace Mihaja.Models
             set { _userBirth = value; }
         }
 
-        public User()
-        {
-        }
+       
 
         public User(int userId, string userName, string userFirstName, DateTime userBirth, string userPassword)
         {
