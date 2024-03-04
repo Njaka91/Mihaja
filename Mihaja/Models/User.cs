@@ -15,7 +15,8 @@ namespace Mihaja.Models
 
         private string _userPassword;
 
-        public string MyProperty
+        public string UserPassword
+
         {
             get { return _userPassword; }
             set { _userPassword = value; }
@@ -63,5 +64,27 @@ namespace Mihaja.Models
             _userBirth = userBirth;
             _userPassword = userPassword;
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is User user &&
+                   _userId == user._userId &&
+                   _userName == user._userName &&
+                   _userFirstName == user._userFirstName &&
+                   _userBirth == user._userBirth &&
+                   _userPassword == user._userPassword;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -726363046;
+            hashCode = hashCode * -1521134295 + _userId.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(_userName);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(_userFirstName);
+            hashCode = hashCode * -1521134295 + _userBirth.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(_userPassword);
+            return hashCode;
+        }
+
     }
 }
