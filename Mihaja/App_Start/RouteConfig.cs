@@ -23,6 +23,7 @@ namespace Mihaja
                 name: "Accueil",
                 url: "User/Index"
                 );
+            //routes.MapRoute();
         }
     }
 }
