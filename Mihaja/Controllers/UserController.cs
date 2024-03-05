@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mihaja.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,16 @@ namespace Mihaja.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult Login (User user)
+        {
+            if (DbConnexionUser.CheckUser(user))
+            {
+                Session["username"] = user.UserName;
+                return Content($"<h1> Bonjour {Session["username"]}</h1>");
+            }
+            return RedirectToRoute("Accueil");
         }
 
         // GET: User/Details/5
