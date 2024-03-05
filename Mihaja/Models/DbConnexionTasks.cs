@@ -12,14 +12,21 @@ namespace Mihaja.Models
         public static NpgsqlConnection connectionString =
            new NpgsqlConnection(ConfigurationManager.ConnectionStrings["todomihaja"].ConnectionString);
 
-        public static List<Task> ListeTasks (Task task)
+        public static List<Task> ListeTasks (string user)
         {
-            var req = $"SELECT * FROM public.task WHERE taskname = '{task.TaskName}' AND taskuser = '{task.TaskUser}' ";
+            List<Task> tasks = new List<Task>();
+            var req = $"SELECT taskname, taskuser, statement FROM public.task WHERE taskuser = '{user}' ";
             try
             {
                 connectionString.Open();
                 var cmd = new NpgsqlCommand(req, connectionString);
-                cmd.ExecuteNonQuery();
+                var reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    var task = new Task(reader.GetString(0), reader.GetString(1),reader.GetBoolean(2));
+                    tasks.Add(task);
+                }
                 connectionString.Close();
             }
             catch (Exception e)
@@ -28,7 +35,7 @@ namespace Mihaja.Models
                 throw e;
             }
 
-            return null;
+            return tasks;
         }
     }
 }
