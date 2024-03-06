@@ -27,6 +27,10 @@ namespace Mihaja
                 name: "PageList",
                 url: "Task/Index"
                 ) ;
+            routes.MapRoute(
+               name: "AddModal",
+               url: "Task/Modifier"
+               );
         }
     }
 }

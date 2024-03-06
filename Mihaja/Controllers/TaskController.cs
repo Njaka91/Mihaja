@@ -14,5 +14,15 @@ namespace Mihaja.Controllers
         {
             return View(DbConnexionTasks.ListeTasks(Session["username"].ToString()));
         }
+
+        public ActionResult Modifier()
+        {
+            return View();
+        }
+
+        public ActionResult Create()
+        {
+            return RedirectToRoute("AddModal")
+        }
     }
 }
