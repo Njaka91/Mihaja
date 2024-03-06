@@ -22,7 +22,8 @@ namespace Mihaja.Controllers
 
         public ActionResult Create()
         {
-            return RedirectToRoute("AddModal")
+            return RedirectToRoute("AddModal");
+
         }
     }
 }
