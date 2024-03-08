@@ -20,9 +20,13 @@ namespace Mihaja.Controllers
             return View();
         }
 
-        public ActionResult Create()
+        public ActionResult Create(FormCollection formCollection)
         {
-            return RedirectToRoute("AddModal");
+            string taskname = formCollection["username"];
+            Task task = new Task(formCollection["taskname"], Session["username"].ToString(),false);
+            DbConnexionTasks.AjoutTache(task);
+
+            return RedirectToRoute("PageList");
 
         }
     }

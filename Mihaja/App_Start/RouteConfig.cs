@@ -31,6 +31,6 @@ namespace Mihaja
                name: "AddModal",
                url: "Task/Modifier"
                );
-        }
+         }
     }
 }

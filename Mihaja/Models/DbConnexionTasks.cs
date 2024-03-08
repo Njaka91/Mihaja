@@ -38,6 +38,24 @@ namespace Mihaja.Models
             return tasks;
         }
 
+        public static void AjoutTache (Task task)
+        {
+            var req = $"INSERT INTO public.task(taskname, taskuser, statement)VALUES( '{task.TaskName}', '{task.TaskUser}', '{task.TaskStatement}'); ";
+            try
+            {
+                connectionString.Open();
+                var cmd = new NpgsqlCommand (req, connectionString);
+                cmd.ExecuteNonQuery();
+                connectionString.Close();
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+
 
     }
 }
