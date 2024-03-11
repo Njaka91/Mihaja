@@ -20,7 +20,7 @@ namespace Mihaja.Controllers
             if (DbConnexionUser.CheckUser(user))
             {
                 Session["username"] = user.UserName;
-                return Content($"<h1> Bonjour {Session["username"]}</h1>");
+                return RedirectToRoute("PageList");
             }
             return RedirectToRoute("Accueil");
         }

@@ -23,6 +23,14 @@ namespace Mihaja
                 name: "Accueil",
                 url: "User/Index"
                 );
-        }
+            routes.MapRoute(
+                name: "PageList",
+                url: "Task/Index"
+                ) ;
+            routes.MapRoute(
+               name: "AddModal",
+               url: "Task/Modifier"
+               );
+         }
     }
 }
