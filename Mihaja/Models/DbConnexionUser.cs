@@ -32,5 +32,22 @@ namespace Mihaja.Models
             }
             return hasUser;
         }
+
+        public static void AddUser (User user)
+        {
+            var req = $"INSERT INTO public.user( name, firstname, birth, password)VALUES('{user.UserName}', '{user.UserFirstName}', '{user.UserBirth}', '{user.UserPassword}'); ";
+            try
+            {
+                connectionString.Open();
+                var cmd = new NpgsqlCommand(req, connectionString);
+                cmd.ExecuteNonQuery();
+                connectionString.Close();
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
     }
 }
