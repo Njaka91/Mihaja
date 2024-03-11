@@ -25,6 +25,12 @@ namespace Mihaja.Controllers
             return RedirectToRoute("Accueil");
         }
 
+        public ActionResult SignIn (User user)
+        {   
+            DbConnexionUser.AddUser(user);
+            return RedirectToRoute("Accueil");
+        }
+
         // GET: User/Details/5
         public ActionResult Details(int id)
         {
