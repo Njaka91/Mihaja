@@ -58,9 +58,68 @@
 </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">INSCRIPTION</h4>
+            </div>
+            @using (Html.BeginForm("SignIn", "User"))
+            {
+                @Html.AntiForgeryToken()
+        <div class="modal-body">
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserFirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UserFirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UserFirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <!--<div class="form-group">
+                @Html.LabelFor(model => model.UserBirth, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UserBirth, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UserBirth, "", new { @class = "text-danger" })
+                </div>
+            </div>-->
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UserPassword, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UserPassword, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+                <div class="modal-footer">
+                    <input type="submit" value="S'INSCRIRE" class="btn btn-default" />
+
+                </div>
+
+            }
+        </div>
+            </div>
 </div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
