@@ -22,12 +22,21 @@ namespace Mihaja.Controllers
 
         public ActionResult Create(FormCollection formCollection)
         {
+            
             string taskname = formCollection["username"];
             Task task = new Task(formCollection["taskname"], Session["username"].ToString(),false);
+            Session["idtsk"] = task.TaskId;
             DbConnexionTasks.AjoutTache(task);
 
             return RedirectToRoute("PageList");
 
+        }
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+           
+            DbConnexionTasks.SuppresionTache(id);
+            return RedirectToRoute("PageList");
         }
     }
 }

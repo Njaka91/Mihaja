@@ -15,7 +15,7 @@ namespace Mihaja.Models
         public static List<Task> ListeTasks (string user)
         {
             List<Task> tasks = new List<Task>();
-            var req = $"SELECT taskname, taskuser, statement FROM public.task WHERE taskuser = '{user}' ";
+            var req = $"SELECT id, taskname, taskuser, statement FROM public.task WHERE taskuser = '{user}' ";
             try
             {
                 connectionString.Open();
@@ -24,7 +24,7 @@ namespace Mihaja.Models
 
                 while (reader.Read())
                 {
-                    var task = new Task(reader.GetString(0), reader.GetString(1),reader.GetBoolean(2));
+                    var task = new Task(reader.GetInt32(0), reader.GetString(1), reader.GetString(2),reader.GetBoolean(3));
                     tasks.Add(task);
                 }
                 connectionString.Close();
@@ -56,6 +56,21 @@ namespace Mihaja.Models
             }
         }
 
+        public static void SuppresionTache (int id)
+        {
+            var req = $"DELETE FROM public.task WHERE id = '{id}' ";
+            try
+            {
+                connectionString.Open();
+                var cmd = new NpgsqlCommand(req, connectionString);
+                cmd.ExecuteNonQuery ();
+                connectionString.Close();
+            }
+            catch (Exception e)
+            {
 
+                throw e;
+            }
+        }
     }
 }
