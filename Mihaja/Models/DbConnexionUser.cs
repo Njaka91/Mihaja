@@ -35,7 +35,7 @@ namespace Mihaja.Models
 
         public static void AddUser (User user)
         {
-            var req = $"INSERT INTO public.user( name, firstname, birth, password)VALUES('{user.UserName}', '{user.UserFirstName}', '{user.UserBirth}', '{user.UserPassword}'); ";
+            var req = $"INSERT INTO public.user( name, firstname, password)VALUES('{user.UserName}', '{user.UserFirstName}', '{user.UserPassword}'); ";
             try
             {
                 connectionString.Open();
