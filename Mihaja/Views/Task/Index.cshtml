@@ -27,26 +27,71 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>
+            <td id="taskName_@item.TaskId">
                 @Html.DisplayFor(modelItem => item.TaskName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TaskUser)
             </td>
-            <td>
+            <td id="statement_@item.TaskId">
                 @Html.DisplayFor(modelItem => item.TaskStatement)
             </td>
             <td>
-                <button type="submit" class="btn btn-default">
-                    @Html.ActionLink("Edit", "Edit", new { id = item.TaskId })
-                </button> |
-                
-                    @Html.ActionLink("Delete", "Delete", new { id = item.TaskId }, new {@class="btn btn-danger"})
-                
+                <input type="button" class="btn btn-default" data-toggle="modal" data-target="#modifyTask" value="Modify task" onclick="updateFields(@item.TaskId)"/> |
 
-                
+                @Html.ActionLink("Delete", "Delete", new { id = item.TaskId }, new { @class = "btn btn-danger" })
+
+
+
             </td>
         </tr>
+
+        <!--<div class="modal fade" id="modifyTask" tabindex="-1" role="dialog" aria-labelledby="modalLabel_@item.TaskId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">-->
+
+        <div class="modal fade" id="modifyTask" tabindex="-1" role="dialog" aria-labelledby="modalLabel_@item.TaskId" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Modification</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @using (Html.BeginForm("ModifyTask", "Task", new { enctype = "multipart/form-data" }))
+
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" id="idTacheInput" name="idTask" />
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Todo</label>
+                                <input type="text" class="form-control" id="tacheDescriptionInput" name="tasks" />
+                            </div>
+
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="tacheStateInput" name="statements">
+                                <label class="form-check-label" for="tacheStateInput">check out</label>
+                            </div>
+
+                            <div class="form-horizontal">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Valider" class="btn btn-primary" />
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
     }
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -56,22 +101,22 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">Add new task</h4>
                 </div>
-                @using (Html.BeginForm("Create","Task", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                @using (Html.BeginForm("Create", "Task", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken()
-            <div class="modal-body">
+                    <div class="modal-body">
 
-                
 
-                <div class="form-group">
-                    <div class="col-md-10">
-                        <input type="text" name="taskname" value="" />
+
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <input type="text" name="taskname" value="" />
+                            </div>
+                        </div>
+
+
+
                     </div>
-                </div>
-
-
-
-            </div>
                     <div class="modal-footer">
                         <input type="submit" value="Save" class="btn btn-default" />
                     </div>
@@ -79,4 +124,21 @@
             </div>
         </div>
     </div>
+
+
+
 </table>
+<script>
+    function updateFields(id) {
+        document.getElementById('idTacheInput').value = id;
+
+        var descriptionTd = document.getElementById('taskName_' + id);
+        var stateTd = document.getElementById('statement_' + id);
+
+        var tacheDescriptionInput = document.getElementById('tacheDescriptionInput');
+        var tacheStateInput = document.getElementById('tacheStateInput');
+
+        tacheDescriptionInput.value = descriptionTd.innerText.trim();
+        tacheStateInput.checked = stateTd.querySelector('input[type="checkbox"]').checked;
+    }
+</script>

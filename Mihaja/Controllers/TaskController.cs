@@ -38,5 +38,13 @@ namespace Mihaja.Controllers
             DbConnexionTasks.SuppresionTache(id);
             return RedirectToRoute("PageList");
         }
+
+        [HttpPost]
+        public ActionResult ModifyTask(FormCollection form)
+        {
+            var tache = new Task( form["tasks"], Session["username"].ToString(), form["statements"] == null ? false : true);
+            DbConnexionTasks.Edittask(int.Parse(form["idTask"]), tache);
+            return RedirectToRoute("PageList");
+        }
     }
 }

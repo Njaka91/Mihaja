@@ -15,7 +15,7 @@ namespace Mihaja.Models
         public static List<Task> ListeTasks (string user)
         {
             List<Task> tasks = new List<Task>();
-            var req = $"SELECT id, taskname, taskuser, statement FROM public.task WHERE taskuser = '{user}' ";
+            var req = $"SELECT id, taskname, taskuser, statement FROM public.task WHERE taskuser = '{user}' ORDER BY id ";
             try
             {
                 connectionString.Open();
@@ -71,6 +71,25 @@ namespace Mihaja.Models
 
                 throw e;
             }
+        }
+
+
+        public static void Edittask (int id, Task task)
+        {
+            var req = $"UPDATE public.task SET taskname= '{task.TaskName}' , statement= '{task.TaskStatement}'  WHERE id = '{id}'";
+
+            try
+            {
+                connectionString.Open();
+                var cmd = new NpgsqlCommand(req, connectionString);
+                cmd.ExecuteNonQuery();
+                connectionString.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
     }
 }
